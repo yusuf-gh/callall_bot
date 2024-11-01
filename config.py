@@ -2,7 +2,7 @@ from aiogram import Bot, Dispatcher, types, Router
 from aiogram.filters import Command
 
 
-# -1002422035606
+
 API_TOKEN = '7898591490:AAGJ3EEkeooqYXfRQSVkgD2SxOpQc4Qq5M0'
 ERRORS_GROUP_ID = -4587996370
 
