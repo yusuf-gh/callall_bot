@@ -1,9 +1,13 @@
 from aiogram import Bot, Dispatcher, types, Router
 from aiogram.filters import Command
 
+# 📥 Загружаем переменные из .env
+load_dotenv()
+
 # 🔑 Токены
-API_TOKEN = API_TELEGRAM_BOT
-ERRORS_GROUP_ID = GROUP_ID  # Группа для логирования ошибок
+API_TOKEN = os.getenv("API_TOKEN")
+ERRORS_GROUP_ID = os.getenv("ERRORS_GROUP_ID")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 # 🚀 Инициализация бота
 bot = Bot(token=API_TOKEN, parse_mode=ParseMode.HTML)
