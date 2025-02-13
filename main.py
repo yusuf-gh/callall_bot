@@ -3,7 +3,7 @@ from aiogram.filters import Command
 
 
 
-API_TOKEN = '7898591490:AAGJ3EEkeooqYXfRQSVkgD2SxOpQc4Qq5M0'
+API_TOKEN = API_TELEGRAM_BOT
 ERRORS_GROUP_ID = -4587996370
 
 bot = Bot(token=API_TOKEN)
