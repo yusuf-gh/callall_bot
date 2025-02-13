@@ -1,16 +1,24 @@
-from aiogram import Bot, Dispatcher, types, Router
+import asyncio
+import os
+import openai
+from aiogram import Bot, Dispatcher, types, Router, F
+from aiogram.enums import ParseMode
+from aiogram.client.default import DefaultBotProperties
 from aiogram.filters import Command
+from dotenv import load_dotenv
 
 # 📥 Загружаем переменные из .env
 load_dotenv()
 
-# 🔑 Токены
+# 🔑 Получаем ключи из окружения
 API_TOKEN = os.getenv("API_TOKEN")
 ERRORS_GROUP_ID = os.getenv("ERRORS_GROUP_ID")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
+
+
 # 🚀 Инициализация бота
-bot = Bot(token=API_TOKEN, parse_mode=ParseMode.HTML)
+bot = Bot(token=API_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 dp = Dispatcher()
 router = Router()
 
@@ -23,7 +31,7 @@ def get_poetic_response(user_request: str):
         response = openai.ChatCompletion.create(
             model="gpt-4o-mini",
             messages=[
-                {"role": "system", "content": "You are a poetic butler named Sebastian in a Telegram group."},
+                {"role": "system", "content": "You are a short poetic butler named Sebastian in a Telegram group."},
                 {"role": "user", "content": user_request}
             ],
             max_tokens=100
@@ -50,7 +58,7 @@ async def tag_all_members(message: types.Message):
         await bot.send_message(ERRORS_GROUP_ID, f"Ошибка: {e}")
 
 # 🤖 Хэндлер для реакции на "Себастьян"
-@router.message(F.text.lower().contains("cебастьян"))
+@router.message(F.text.casefold().contains("себастьян"))  # ✅ Исправлено
 async def respond_to_sebastian(message: types.Message):
     user_text = message.text.split("Себастьян", 1)[-1].strip()
 
@@ -70,5 +78,6 @@ async def main():
 # 🔥 Запуск бота
 if __name__ == "__main__":
     asyncio.run(main())
+
 
 
