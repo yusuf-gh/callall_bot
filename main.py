@@ -4,7 +4,7 @@ from aiogram.filters import Command
 
 
 API_TOKEN = API_TELEGRAM_BOT
-ERRORS_GROUP_ID = -4587996370
+ERRORS_GROUP_ID = GROUP_ID
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
